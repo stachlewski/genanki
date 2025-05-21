@@ -1,6 +1,7 @@
 import itertools
 import json
 import os
+import os.path
 import sqlite3
 import tempfile
 import time
@@ -50,7 +51,7 @@ class Package:
       outzip.writestr('media', json.dumps(media_json))
 
       for idx, path in media_file_idx_to_path.items():
-        outzip.write(path, str(idx))
+        outzip.write(path, os.path.basename(path))
 
   def write_to_db(self, cursor, timestamp: float, id_gen):
     cursor.executescript(APKG_SCHEMA)
